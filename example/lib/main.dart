@@ -83,6 +83,34 @@ class _MyAppState extends State<MyApp> {
                   subtitle: const Text('fooInt'),
                 ),
               ),
+              FutureBuilder<String?>(
+                future: _flutterLaunchArgumentsPlugin.getString('fooAbsent'),
+                builder: (context, snapshot) => ListTile(
+                  title: Text('${snapshot.data}'),
+                  subtitle: const Text('absent String'),
+                ),
+              ),
+              FutureBuilder<bool?>(
+                future: _flutterLaunchArgumentsPlugin.getBool('fooAbsent'),
+                builder: (context, snapshot) => ListTile(
+                  title: Text('${snapshot.data}'),
+                  subtitle: const Text('absent Bool'),
+                ),
+              ),
+              FutureBuilder<double?>(
+                future: _flutterLaunchArgumentsPlugin.getDouble('fooAbsent'),
+                builder: (context, snapshot) => ListTile(
+                  title: Text('${snapshot.data}'),
+                  subtitle: const Text('absent Double'),
+                ),
+              ),
+              FutureBuilder<int?>(
+                future: _flutterLaunchArgumentsPlugin.getInt('fooAbsent'),
+                builder: (context, snapshot) => ListTile(
+                  title: Text('${snapshot.data}'),
+                  subtitle: const Text('absent Int'),
+                ),
+              ),
             ],
           ),
         ),

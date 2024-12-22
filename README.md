@@ -41,8 +41,7 @@ To get a launch argument, you can use the following methods:
 - `getInt(String key)`: retrieves an integer argument from the launch arguments
 
 These methods return a `Future` with the type of the argument you are trying to retrieve.
-If the argument is not found, the future will return `null` except for `getBool`, `getInt` and
-`getDouble` which will return `false`, `0` and `0.0` respectively on iOS.
+If the argument is not found, the future will return `null`.
 
 Before using these methods, you need to initialize the plugin by calling `FlutterLaunchArguments()`
 which is a singleton.

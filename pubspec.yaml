@@ -1,6 +1,6 @@
 name: flutter_launch_arguments
 description: "A flutter plugin to retrieve Android and iOS launch arguments"
-version: 1.0.0
+version: 1.0.1
 repository: https://github.com/MyLittleSuite/flutter_launch_arguments
 issue_tracker: https://github.com/MyLittleSuite/flutter_launch_arguments/issues
 homepage: https://www.mylittlesuite.com

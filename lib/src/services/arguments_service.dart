@@ -15,7 +15,6 @@ PlatformException _createConnectionError(String channelName) {
   );
 }
 
-
 class _PigeonCodec extends StandardMessageCodec {
   const _PigeonCodec();
   @override
@@ -41,9 +40,11 @@ class ArgumentsService {
   /// Constructor for [ArgumentsService].  The [binaryMessenger] named argument is
   /// available for dependency injection.  If it is left null, the default
   /// BinaryMessenger will be used which routes to the host platform.
-  ArgumentsService({BinaryMessenger? binaryMessenger, String messageChannelSuffix = ''})
+  ArgumentsService(
+      {BinaryMessenger? binaryMessenger, String messageChannelSuffix = ''})
       : pigeonVar_binaryMessenger = binaryMessenger,
-        pigeonVar_messageChannelSuffix = messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
+        pigeonVar_messageChannelSuffix =
+            messageChannelSuffix.isNotEmpty ? '.$messageChannelSuffix' : '';
   final BinaryMessenger? pigeonVar_binaryMessenger;
 
   static const MessageCodec<Object?> pigeonChannelCodec = _PigeonCodec();
@@ -51,8 +52,10 @@ class ArgumentsService {
   final String pigeonVar_messageChannelSuffix;
 
   Future<String?> getString(String key) async {
-    final String pigeonVar_channelName = 'dev.flutter.pigeon.flutter_launch_arguments.ArgumentsService.getString$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.flutter_launch_arguments.ArgumentsService.getString$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
@@ -73,8 +76,10 @@ class ArgumentsService {
   }
 
   Future<bool?> getBool(String key) async {
-    final String pigeonVar_channelName = 'dev.flutter.pigeon.flutter_launch_arguments.ArgumentsService.getBool$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.flutter_launch_arguments.ArgumentsService.getBool$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
@@ -95,8 +100,10 @@ class ArgumentsService {
   }
 
   Future<int?> getInt(String key) async {
-    final String pigeonVar_channelName = 'dev.flutter.pigeon.flutter_launch_arguments.ArgumentsService.getInt$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.flutter_launch_arguments.ArgumentsService.getInt$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,
@@ -117,8 +124,10 @@ class ArgumentsService {
   }
 
   Future<double?> getDouble(String key) async {
-    final String pigeonVar_channelName = 'dev.flutter.pigeon.flutter_launch_arguments.ArgumentsService.getDouble$pigeonVar_messageChannelSuffix';
-    final BasicMessageChannel<Object?> pigeonVar_channel = BasicMessageChannel<Object?>(
+    final String pigeonVar_channelName =
+        'dev.flutter.pigeon.flutter_launch_arguments.ArgumentsService.getDouble$pigeonVar_messageChannelSuffix';
+    final BasicMessageChannel<Object?> pigeonVar_channel =
+        BasicMessageChannel<Object?>(
       pigeonVar_channelName,
       pigeonChannelCodec,
       binaryMessenger: pigeonVar_binaryMessenger,

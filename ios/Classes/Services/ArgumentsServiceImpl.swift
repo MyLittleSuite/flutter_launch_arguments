@@ -25,18 +25,42 @@
 
 class ArgumentsServiceImpl: NSObject, ArgumentsService {
     func getString(key: String) throws -> String? {
-        return UserDefaults.standard.string(forKey: key)
+        let dict = UserDefaults.standard.dictionaryRepresentation()
+        
+        if (dict[key] != nil) {
+            return UserDefaults.standard.string(forKey: key)
+        }
+        
+        return nil
     }
     
     func getBool(key: String) throws -> Bool? {
-        return UserDefaults.standard.bool(forKey: key)
+        let dict = UserDefaults.standard.dictionaryRepresentation()
+        
+        if (dict[key] != nil) {
+            return UserDefaults.standard.bool(forKey: key)
+        }
+        
+        return nil
     }
     
     func getInt(key: String) throws -> Int64? {
-        return Int64(UserDefaults.standard.integer(forKey: key))
+        let dict = UserDefaults.standard.dictionaryRepresentation()
+        
+        if (dict[key] != nil) {
+            return Int64(UserDefaults.standard.integer(forKey: key))
+        }
+        
+        return nil
     }
     
     func getDouble(key: String) throws -> Double? {
-        return UserDefaults.standard.double(forKey: key)
+        let dict = UserDefaults.standard.dictionaryRepresentation()
+        
+        if (dict[key] != nil) {
+            return UserDefaults.standard.double(forKey: key)
+        }
+        
+        return nil
     }
 }

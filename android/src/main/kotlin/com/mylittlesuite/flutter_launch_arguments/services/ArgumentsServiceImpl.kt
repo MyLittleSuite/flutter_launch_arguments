@@ -34,24 +34,40 @@ class ArgumentsServiceImpl(
     override fun getString(key: String): String? {
         val bundle = bundleInterface()
 
-        return bundle?.getString(key)
+        if (bundle?.containsKey(key) == true) {
+            return bundle.getString(key)
+        }
+
+        return null;
     }
 
     override fun getBool(key: String): Boolean? {
         val bundle = bundleInterface()
 
-        return bundle?.getBoolean(key)
+        if (bundle?.containsKey(key) == true) {
+            return bundle.getBoolean(key)
+        }
+
+        return null
     }
 
     override fun getInt(key: String): Long? {
         val bundle = bundleInterface()
 
-        return bundle?.getInt(key)?.toLong()
+        if (bundle?.containsKey(key) == true) {
+            return bundle.getInt(key).toLong()
+        }
+
+        return null
     }
 
     override fun getDouble(key: String): Double? {
         val bundle = bundleInterface()
 
-        return bundle?.getDouble(key)
+        if (bundle?.containsKey(key) == true) {
+            return bundle.getDouble(key)
+        }
+
+        return null
     }
 }
