@@ -1,0 +1,23 @@
+name: Pipeline
+
+on: push
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  analyze:
+    name: Testing
+    uses: ./.github/workflows/analyze.yml
+
+  build:
+    name: Build ${{ matrix.platform }}
+    needs:
+      - analyze
+    strategy:
+      matrix:
+        platform: [ android, ios ]
+    uses: ./.github/workflows/build.yml
+    with:
+      platform: ${{ matrix.platform }}
