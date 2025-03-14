@@ -23,7 +23,7 @@ jobs:
       platform: ${{ matrix.platform }}
 
   release:
+    name: Release
     needs:
       - build
-    name: Release
     uses: ./.github/workflows/release.yml
