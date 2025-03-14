@@ -22,8 +22,8 @@ jobs:
     with:
       platform: ${{ matrix.platform }}
 
-  release:
-    name: Release
+  publish:
+    name: Publish
     needs:
       - build
-    uses: ./.github/workflows/release.yml
+    uses: ./.github/workflows/publish.yml
