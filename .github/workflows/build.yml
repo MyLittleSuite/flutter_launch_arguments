@@ -21,6 +21,11 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Select XCode Version
+        uses: maxim-lobanov/setup-xcode@v1
+        if: ${{ inputs.platform == 'ios' }}
+        with:
+          xcode-version: latest-stable
       - name: Download iOS Platform
         if: ${{ inputs.platform == 'ios' }}
         run: |
