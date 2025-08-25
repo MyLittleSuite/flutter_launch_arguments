@@ -21,6 +21,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
+      - name: Download iOS Platform
+        if: ${{ inputs.platform == 'ios' }}
+        run: |
+          xcodebuild -downloadPlatform iOS
       - name: Setup Android SDK
         if: ${{ inputs.platform == 'android' }}
         uses: android-actions/setup-android@v3
