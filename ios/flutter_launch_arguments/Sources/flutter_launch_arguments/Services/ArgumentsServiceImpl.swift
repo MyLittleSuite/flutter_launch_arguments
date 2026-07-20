@@ -25,18 +25,13 @@
 
 class ArgumentsServiceImpl: NSObject, ArgumentsService {
     func getString(key: String) throws -> String? {
-        let dict = UserDefaults.standard.dictionaryRepresentation()
+        guard UserDefaults.standard.object(forKey: key) != nil else { return nil }
 
-        if (dict[key] != nil) {
-            return UserDefaults.standard.string(forKey: key)
-        }
-
-        return nil
+        return UserDefaults.standard.string(forKey: key)
     }
 
     func getBool(key: String) throws -> Bool? {
-        let dict = UserDefaults.standard.dictionaryRepresentation()
-        guard let value = dict[key] else { return nil }
+        guard let value = UserDefaults.standard.object(forKey: key) else { return nil }
 
         switch value {
         case let boolValue as Bool:
@@ -53,8 +48,7 @@ class ArgumentsServiceImpl: NSObject, ArgumentsService {
     }
 
     func getInt(key: String) throws -> Int64? {
-        let dict = UserDefaults.standard.dictionaryRepresentation()
-        guard let value = dict[key] else { return nil }
+        guard let value = UserDefaults.standard.object(forKey: key) else { return nil }
 
         switch value {
         case let numberValue as NSNumber:
@@ -68,8 +62,7 @@ class ArgumentsServiceImpl: NSObject, ArgumentsService {
     }
 
     func getDouble(key: String) throws -> Double? {
-        let dict = UserDefaults.standard.dictionaryRepresentation()
-        guard let value = dict[key] else { return nil }
+        guard let value = UserDefaults.standard.object(forKey: key) else { return nil }
 
         switch value {
         case let numberValue as NSNumber:
