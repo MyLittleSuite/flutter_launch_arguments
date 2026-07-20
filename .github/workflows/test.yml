@@ -49,4 +49,4 @@ jobs:
         run: |
           DEVICE_NAME=$(xcrun simctl list devices available -j | jq -r '[.devices[][] | select(.isAvailable == true and (.name | startswith("iPhone")))][0].name')
           echo "Using simulator: $DEVICE_NAME"
-          xcodebuild test -workspace Runner.xcworkspace -scheme Runner -destination "platform=iOS Simulator,name=$DEVICE_NAME"
+          xcodebuild test -workspace Runner.xcworkspace -scheme Runner -destination "platform=iOS Simulator,name=$DEVICE_NAME" EXCLUDED_ARCHS=x86_64
