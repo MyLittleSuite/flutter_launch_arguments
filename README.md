@@ -3,7 +3,7 @@
 A flutter plugin to retrieve Android and iOS launch arguments
 
 [![Pub](https://img.shields.io/pub/v/flutter_launch_arguments.svg)](https://pub.dev/packages/flutter_launch_arguments)
-![Dart CI](https://github.com/MyLittleSuite/flutter_launch_arguments/workflows/Dart%20CI/badge.svg)
+[![Pipeline](https://github.com/MyLittleSuite/flutter_launch_arguments/actions/workflows/default.yml/badge.svg)](https://github.com/MyLittleSuite/flutter_launch_arguments/actions/workflows/default.yml)
 [![Star on GitHub](https://img.shields.io/github/stars/MyLittleSuite/flutter_launch_arguments.svg?style=flat&logo=github&colorB=deeppink&label=stars)](https://github.com/MyLittleSuite/flutter_launch_arguments)
 [![License: MIT](https://img.shields.io/badge/license-MIT-purple.svg)](https://opensource.org/licenses/MIT)
 
