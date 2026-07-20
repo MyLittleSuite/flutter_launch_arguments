@@ -23,44 +23,57 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
+import Foundation
+
 class ArgumentsServiceImpl: NSObject, ArgumentsService {
     func getString(key: String) throws -> String? {
-        let dict = UserDefaults.standard.dictionaryRepresentation()
-        
-        if (dict[key] != nil) {
-            return UserDefaults.standard.string(forKey: key)
-        }
-        
-        return nil
+        guard UserDefaults.standard.object(forKey: key) != nil else { return nil }
+
+        return UserDefaults.standard.string(forKey: key)
     }
-    
+
     func getBool(key: String) throws -> Bool? {
-        let dict = UserDefaults.standard.dictionaryRepresentation()
-        
-        if (dict[key] != nil) {
-            return UserDefaults.standard.bool(forKey: key)
+        guard let value = UserDefaults.standard.object(forKey: key) else { return nil }
+
+        switch value {
+        case let boolValue as Bool:
+            return boolValue
+        case let stringValue as String:
+            switch stringValue.lowercased() {
+            case "true": return true
+            case "false": return false
+            default: return nil
+            }
+        default:
+            return nil
         }
-        
-        return nil
     }
-    
+
     func getInt(key: String) throws -> Int64? {
-        let dict = UserDefaults.standard.dictionaryRepresentation()
-        
-        if (dict[key] != nil) {
-            return Int64(UserDefaults.standard.integer(forKey: key))
+        guard let value = UserDefaults.standard.object(forKey: key) else { return nil }
+
+        switch value {
+        case let numberValue as NSNumber:
+            if CFGetTypeID(numberValue) == CFBooleanGetTypeID() { return nil }
+            return numberValue.int64Value
+        case let stringValue as String:
+            return Int64(stringValue)
+        default:
+            return nil
         }
-        
-        return nil
     }
-    
+
     func getDouble(key: String) throws -> Double? {
-        let dict = UserDefaults.standard.dictionaryRepresentation()
-        
-        if (dict[key] != nil) {
-            return UserDefaults.standard.double(forKey: key)
+        guard let value = UserDefaults.standard.object(forKey: key) else { return nil }
+
+        switch value {
+        case let numberValue as NSNumber:
+            if CFGetTypeID(numberValue) == CFBooleanGetTypeID() { return nil }
+            return numberValue.doubleValue
+        case let stringValue as String:
+            return Double(stringValue)
+        default:
+            return nil
         }
-        
-        return nil
     }
 }

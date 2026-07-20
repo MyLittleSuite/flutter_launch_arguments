@@ -7,7 +7,8 @@ import 'package:pigeon/pigeon.dart';
   kotlinOptions: KotlinOptions(
     package: 'com.mylittlesuite.flutter_launch_arguments.services',
   ),
-  swiftOut: 'ios/Classes/Services/ArgumentsService.swift',
+  swiftOut:
+      'ios/flutter_launch_arguments/Sources/flutter_launch_arguments/Services/ArgumentsService.swift',
   dartPackageName: 'flutter_launch_arguments',
 ))
 @HostApi()
