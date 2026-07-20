@@ -37,6 +37,7 @@ jobs:
         if: ${{ inputs.platform == 'ios' }}
         working-directory: example
         run: |
+          flutter config --enable-swift-package-manager
           flutter pub get
       - name: Install iOS pods
         if: ${{ inputs.platform == 'ios' }}

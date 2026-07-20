@@ -23,6 +23,8 @@
 // OTHER DEALINGS IN THE SOFTWARE.
 //
 
+import Foundation
+
 class ArgumentsServiceImpl: NSObject, ArgumentsService {
     func getString(key: String) throws -> String? {
         guard UserDefaults.standard.object(forKey: key) != nil else { return nil }
