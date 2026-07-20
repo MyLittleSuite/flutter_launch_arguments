@@ -27,6 +27,7 @@ package com.mylittlesuite.flutter_launch_arguments.services
 
 import android.os.Bundle
 
+@Suppress("DEPRECATION")
 class ArgumentsServiceImpl(
     private val bundleInterface: () -> Bundle?,
 ) : ArgumentsService {
@@ -42,32 +43,42 @@ class ArgumentsServiceImpl(
     }
 
     override fun getBool(key: String): Boolean? {
-        val bundle = bundleInterface()
+        val bundle = bundleInterface() ?: return null
+        if (!bundle.containsKey(key)) return null
 
-        if (bundle?.containsKey(key) == true) {
-            return bundle.getBoolean(key)
+        return when (val value = bundle.get(key)) {
+            is Boolean -> value
+            is String -> when {
+                value.equals("true", ignoreCase = true) -> true
+                value.equals("false", ignoreCase = true) -> false
+                else -> null
+            }
+            else -> null
         }
-
-        return null
     }
 
     override fun getInt(key: String): Long? {
-        val bundle = bundleInterface()
+        val bundle = bundleInterface() ?: return null
+        if (!bundle.containsKey(key)) return null
 
-        if (bundle?.containsKey(key) == true) {
-            return bundle.getInt(key).toLong()
+        return when (val value = bundle.get(key)) {
+            is Int -> value.toLong()
+            is Long -> value
+            is Short -> value.toLong()
+            is String -> value.toLongOrNull()
+            else -> null
         }
-
-        return null
     }
 
     override fun getDouble(key: String): Double? {
-        val bundle = bundleInterface()
+        val bundle = bundleInterface() ?: return null
+        if (!bundle.containsKey(key)) return null
 
-        if (bundle?.containsKey(key) == true) {
-            return bundle.getDouble(key)
+        return when (val value = bundle.get(key)) {
+            is Double -> value
+            is Float -> value.toDouble()
+            is String -> value.toDoubleOrNull()
+            else -> null
         }
-
-        return null
     }
 }

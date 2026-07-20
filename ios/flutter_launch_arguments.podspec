@@ -13,7 +13,7 @@ A flutter plugin to retrieve Android and iOS launch arguments
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'MyLittleSuite' => 'info@mylittlesuite.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'flutter_launch_arguments/Sources/flutter_launch_arguments/**/*.swift'
   s.dependency 'Flutter'
   s.platform = :ios, '12.0'
 
@@ -25,5 +25,5 @@ A flutter plugin to retrieve Android and iOS launch arguments
   # required reason APIs, update the PrivacyInfo.xcprivacy file to describe your
   # plugin's privacy impact, and then uncomment this line. For more information,
   # see https://developer.apple.com/documentation/bundleresources/privacy_manifest_files
-  # s.resource_bundles = {'flutter_launch_arguments_privacy' => ['Resources/PrivacyInfo.xcprivacy']}
+  # s.resource_bundles = {'flutter_launch_arguments_privacy' => ['flutter_launch_arguments/Sources/flutter_launch_arguments/PrivacyInfo.xcprivacy']}
 end

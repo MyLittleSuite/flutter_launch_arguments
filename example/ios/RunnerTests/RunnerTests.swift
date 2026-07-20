@@ -2,26 +2,121 @@ import Flutter
 import UIKit
 import XCTest
 
-
 @testable import flutter_launch_arguments
 
-// This demonstrates a simple unit test of the Swift portion of this plugin's implementation.
-//
-// See https://developer.apple.com/documentation/xctest for more information about using XCTest.
+// Unit tests for ArgumentsServiceImpl, run via the example app's Xcode project.
+// See https://docs.flutter.dev/testing/testing-plugins for why plugin XCTests
+// live under example/ios/RunnerTests instead of the plugin package itself.
 
 class RunnerTests: XCTestCase {
 
-  func testGetPlatformVersion() {
-    let plugin = FlutterLaunchArgumentsPlugin()
+    private let service = ArgumentsServiceImpl()
 
-    let call = FlutterMethodCall(methodName: "getPlatformVersion", arguments: [])
-
-    let resultExpectation = expectation(description: "result block must be called.")
-    plugin.handle(call) { result in
-      XCTAssertEqual(result as! String, "iOS " + UIDevice.current.systemVersion)
-      resultExpectation.fulfill()
+    private func setDefault(_ value: Any?, forKey key: String) {
+        if let value {
+            UserDefaults.standard.set(value, forKey: key)
+        } else {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
     }
-    waitForExpectations(timeout: 1)
-  }
 
+    override func tearDown() {
+        for key in ["flag", "count", "ratio", "name"] {
+            UserDefaults.standard.removeObject(forKey: key)
+        }
+        super.tearDown()
+    }
+
+    // MARK: - getBool
+
+    func testGetBool_realBooleanExtra_returnsValue() throws {
+        setDefault(true, forKey: "flag")
+        XCTAssertEqual(try service.getBool(key: "flag"), true)
+    }
+
+    func testGetBool_stringLowercaseTrue_returnsTrue() throws {
+        setDefault("true", forKey: "flag")
+        XCTAssertEqual(try service.getBool(key: "flag"), true)
+    }
+
+    func testGetBool_stringTitleCaseTrue_returnsTrue() throws {
+        setDefault("True", forKey: "flag")
+        XCTAssertEqual(try service.getBool(key: "flag"), true)
+    }
+
+    func testGetBool_stringUppercaseTrue_returnsTrue() throws {
+        setDefault("TRUE", forKey: "flag")
+        XCTAssertEqual(try service.getBool(key: "flag"), true)
+    }
+
+    func testGetBool_stringFalse_returnsFalse() throws {
+        setDefault("false", forKey: "flag")
+        XCTAssertEqual(try service.getBool(key: "flag"), false)
+    }
+
+    func testGetBool_unparseableString_returnsNil() throws {
+        setDefault("yes", forKey: "flag")
+        XCTAssertNil(try service.getBool(key: "flag"))
+    }
+
+    func testGetBool_missingKey_returnsNil() throws {
+        setDefault(nil, forKey: "flag")
+        XCTAssertNil(try service.getBool(key: "flag"))
+    }
+
+    // MARK: - getInt
+
+    func testGetInt_realIntExtra_returnsValue() throws {
+        setDefault(42, forKey: "count")
+        XCTAssertEqual(try service.getInt(key: "count"), 42)
+    }
+
+    func testGetInt_stringExtra_returnsParsedValue() throws {
+        setDefault("42", forKey: "count")
+        XCTAssertEqual(try service.getInt(key: "count"), 42)
+    }
+
+    func testGetInt_unparseableString_returnsNil() throws {
+        setDefault("not-a-number", forKey: "count")
+        XCTAssertNil(try service.getInt(key: "count"))
+    }
+
+    func testGetInt_missingKey_returnsNil() throws {
+        setDefault(nil, forKey: "count")
+        XCTAssertNil(try service.getInt(key: "count"))
+    }
+
+    // MARK: - getDouble
+
+    func testGetDouble_realDoubleExtra_returnsValue() throws {
+        setDefault(3.14, forKey: "ratio")
+        XCTAssertEqual(try service.getDouble(key: "ratio"), 3.14)
+    }
+
+    func testGetDouble_stringExtra_returnsParsedValue() throws {
+        setDefault("3.14", forKey: "ratio")
+        XCTAssertEqual(try service.getDouble(key: "ratio"), 3.14)
+    }
+
+    func testGetDouble_unparseableString_returnsNil() throws {
+        setDefault("not-a-number", forKey: "ratio")
+        XCTAssertNil(try service.getDouble(key: "ratio"))
+    }
+
+    func testGetDouble_missingKey_returnsNil() throws {
+        setDefault(nil, forKey: "ratio")
+        XCTAssertNil(try service.getDouble(key: "ratio"))
+    }
+
+    // MARK: - getString (regression guard)
+
+    func testGetString_realStringExtra_returnsValue() throws {
+        setDefault("value", forKey: "name")
+        XCTAssertEqual(try service.getString(key: "name"), "value")
+    }
+
+    func testGetString_missingKey_returnsNil() throws {
+        setDefault(nil, forKey: "name")
+        XCTAssertNil(try service.getString(key: "name"))
+    }
 }

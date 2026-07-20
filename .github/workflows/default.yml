@@ -11,10 +11,21 @@ jobs:
     name: Testing
     uses: ./.github/workflows/analyze.yml
 
+  test:
+    name: Test ${{ matrix.platform }}
+    needs:
+      - analyze
+    strategy:
+      matrix:
+        platform: [ android, ios ]
+    uses: ./.github/workflows/test.yml
+    with:
+      platform: ${{ matrix.platform }}
+
   build:
     name: Build ${{ matrix.platform }}
     needs:
-      - analyze
+      - test
     strategy:
       matrix:
         platform: [ android, ios ]

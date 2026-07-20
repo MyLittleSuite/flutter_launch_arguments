@@ -1,0 +1,48 @@
+name: Run Native Tests
+
+on:
+  workflow_call:
+    inputs:
+      platform:
+        required: true
+        type: string
+
+jobs:
+  test:
+    runs-on: ${{ inputs.platform == 'android' && 'ubuntu-latest' || 'macos-latest' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - name: Setup Flutter
+        uses: ./.github/actions/setup
+      - name: Set up JDK 17
+        if: ${{ inputs.platform == 'android' }}
+        uses: actions/setup-java@v5
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Run Android unit tests
+        if: ${{ inputs.platform == 'android' }}
+        working-directory: example/android
+        run: |
+          ./gradlew testDebugUnitTest
+      - name: Select XCode Version
+        if: ${{ inputs.platform == 'ios' }}
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+      - name: Get example dependencies
+        if: ${{ inputs.platform == 'ios' }}
+        working-directory: example
+        run: |
+          flutter pub get
+      - name: Install iOS pods
+        if: ${{ inputs.platform == 'ios' }}
+        working-directory: example/ios
+        run: |
+          pod install
+      - name: Run iOS unit tests
+        if: ${{ inputs.platform == 'ios' }}
+        working-directory: example/ios
+        run: |
+          xcodebuild test -workspace Runner.xcworkspace -scheme Runner -destination 'platform=iOS Simulator,name=iPhone 15'
