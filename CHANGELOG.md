@@ -1,5 +1,9 @@
 ## Unreleased
 
+* Updated the minimum supported SDK versions to Flutter 3.44 / Dart 3.12
+* Migrated the Android module to built-in Kotlin (AGP 9)
+* Updated the example app to Gradle 9.5.0, Android Gradle Plugin 9.3.1 and `material_ui`
+
 ## 1.1.0
 
 * Added Swift Package Manager support for iOS (CocoaPods still supported)
