@@ -1,5 +1,7 @@
 ## Unreleased
 
+* Fixed the Swift Package Manager build failing with "The package product 'FlutterFramework' requires minimum platform version 13.0 for the iOS platform, but this target supports 12.0"
+* Raised the minimum iOS deployment target to 15.0 (Flutter's own minimum from 3.47 onwards)
 * Updated the minimum supported SDK versions to Flutter 3.44 / Dart 3.12
 * Migrated the Android module to built-in Kotlin (AGP 9)
 * Updated the example app to Gradle 9.5.0, Android Gradle Plugin 9.3.1 and `material_ui`
