@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'flutter_launch_arguments'
-  s.version          = '1.0.0'
+  s.version          = '1.2.0'
   s.summary          = 'A flutter plugin to retrieve Android and iOS launch arguments'
   s.description      = <<-DESC
 A flutter plugin to retrieve Android and iOS launch arguments
