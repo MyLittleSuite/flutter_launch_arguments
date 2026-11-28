@@ -27,8 +27,19 @@ Add the following dependencies to your pubspec.yaml:
 
 ```yaml
 dependencies:
-  flutter_launch_arguments: latest
+  flutter_launch_arguments: ^1.2.0
 ```
+
+### Requirements
+
+| Requirement | Minimum version      |
+|-------------|----------------------|
+| Flutter     | 3.44                 |
+| Dart        | 3.12                 |
+| Android     | API 21 (Android 5.0) |
+| iOS         | 13.0                 |
+
+On iOS the plugin supports both Swift Package Manager and CocoaPods.
 
 ## Usage
 
