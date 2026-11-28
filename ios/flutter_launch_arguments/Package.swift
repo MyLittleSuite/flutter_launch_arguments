@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "flutter_launch_arguments",
-    platforms: [.iOS("15.0")],
+    platforms: [.iOS("13.0")],
     products: [
         .library(name: "flutter-launch-arguments", targets: ["flutter_launch_arguments"])
     ],
